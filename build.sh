@@ -10,4 +10,9 @@ case $(sed --help 2>&1) in
   *) set sed -i '';;
 esac
 
-"$@" -e 's+build+https://supabase-community.github.io/supabase-kubernetes/build+g' ./index.yaml
+"$@" -e 's+build+https://tablecheck-labs.github.io/supabase-kubernetes/+g' ./index.yaml
+
+# Add a step to commit the changes to the repository
+git add .
+git commit -m "Update Helm package and index"
+git push
