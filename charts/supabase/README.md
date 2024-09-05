@@ -15,14 +15,11 @@ The database configuration we provide is an example using only one master. If yo
 > For this section we're using Minikube and Docker to create a Kubernetes cluster
 
 ```bash
-# Clone Repository
-git clone https://github.com/supabase-community/supabase-kubernetes
-
-# Switch to charts directory
-cd supabase-kubernetes/charts/supabase/
+# Add Helm repository
+helm repo add supabase "https://tablecheck-labs.github.io/supabase-kubernetes/"
 
 # Install the chart
-helm install demo -f values.example.yaml .
+helm install supabase/supabase -f values.yaml
 ```
 
 The first deployment can take some time to complete (especially auth service). You can view the status of the pods using:
