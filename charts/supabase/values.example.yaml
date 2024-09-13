@@ -20,6 +20,9 @@ db:
   enabled: true
   image:
     tag: 15.1.0.147
+  initImage:
+    repository: postgres
+    tag: "15-alpine"
   livenessProbe:
     exec:
       command:

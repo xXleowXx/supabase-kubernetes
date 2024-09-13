@@ -30,8 +30,8 @@ spec:
         {{- toYaml .Values.db.podSecurityContext | nindent 8 }}
       initContainers:
         - name: init-db
-          image: "{{ .Values.db.image.repository }}:{{ .Values.db.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: IfNotPresent
+          image: "{{ .Values.db.initImage.repository }}:{{ .Values.db.initImage.tag }}"
+          imagePullPolicy: {{ .Values.db.initImage.pullPolicy }}
           command: ["/bin/sh", "-c"]
           args:
             - |

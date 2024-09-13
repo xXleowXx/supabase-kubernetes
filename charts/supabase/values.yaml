@@ -92,6 +92,11 @@ db:
     repository: supabase/postgres
     pullPolicy: IfNotPresent
     tag: "latest"
+  # New configuration for the init container image
+  initImage:
+    repository: postgres
+    tag: "15-alpine"
+    pullPolicy: IfNotPresent
   imagePullSecrets: []
   replicaCount: 1
   nameOverride: ""
