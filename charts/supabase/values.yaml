@@ -1047,6 +1047,7 @@ functions:
     DB_PORT: 5432
     DB_DRIVER: postgresql
     DB_SSL: disable  # disable, allow, prefer, require, verify-ca, verify-full
+
   # Mount user functions
   # volumeMounts:
   #   - name: my_functions
@@ -1059,6 +1060,17 @@ functions:
   #       items:
   #       - key: my_secret.ts
   #         path: name_of_file_in_container.ts
+  envFrom: []
+    # - secretRef:
+    #     name: env-secret
+  args:
+    - start
+    - --main-service
+    - /home/deno/functions/main
+
+  # Create main function configMap
+  createMainFunction: true
+
   resources: {}
     # We usually recommend not to specify default resources and to leave this as a conscious
     # choice for the user. This also increases chances charts run on environments with little
