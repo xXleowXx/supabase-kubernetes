@@ -2,7 +2,17 @@ apiVersion: v1
 entries:
   supabase:
   - apiVersion: v2
-    created: "2024-09-13T19:07:08.099327695Z"
+    created: "2025-04-22T12:35:47.313425253Z"
+    description: The open source Firebase alternative.
+    digest: a69f5f512c5bff52a5d3e2293c2b4f799ed1280b975c92e36e30befbac264d19
+    icon: https://avatars.githubusercontent.com/u/54469796?s=280&v=4
+    name: supabase
+    type: application
+    urls:
+    - https://tablecheck-labs.github.io/supabase-kubernetes/build/supabase-0.1.5.tgz
+    version: 0.1.5
+  - apiVersion: v2
+    created: "2025-04-22T12:35:47.310618353Z"
     description: The open source Firebase alternative.
     digest: 9d2d259604751e1f57f02bb2baac02a3fabeb299f5377d42a16c65ae1df4dfa1
     icon: https://avatars.githubusercontent.com/u/54469796?s=280&v=4
@@ -12,7 +22,7 @@ entries:
     - https://tablecheck-labs.github.io/supabase-kubernetes/build/supabase-0.1.4.tgz
     version: 0.1.4
   - apiVersion: v2
-    created: "2024-09-13T19:07:08.09583166Z"
+    created: "2025-04-22T12:35:47.30698173Z"
     description: The open source Firebase alternative.
     digest: f0d0263ea508e96002d66e2bb6428d6ee9334325201bf883bab04ed96c617d56
     icon: https://avatars.githubusercontent.com/u/54469796?s=280&v=4
@@ -22,7 +32,7 @@ entries:
     - https://tablecheck-labs.github.io/supabase-kubernetes/build/supabase-0.1.3.tgz
     version: 0.1.3
   - apiVersion: v2
-    created: "2024-09-13T19:07:08.093218549Z"
+    created: "2025-04-22T12:35:47.304299222Z"
     description: The open source Firebase alternative.
     digest: a0d6c0627c049642f3a9a1d068ecc4601d87c26d0326b47422223a7660424e31
     name: supabase
@@ -31,7 +41,7 @@ entries:
     - https://tablecheck-labs.github.io/supabase-kubernetes/build/supabase-0.0.2.tgz
     version: 0.0.2
   - apiVersion: v2
-    created: "2024-09-13T19:07:08.091415445Z"
+    created: "2025-04-22T12:35:47.302430854Z"
     description: The open source Firebase alternative.
     digest: 651547b54edc5cfbac1ed39cb42fc574ee766ff8c1c61aa6cedef84d2faa358f
     name: supabase
@@ -39,4 +49,4 @@ entries:
     urls:
     - https://tablecheck-labs.github.io/supabase-kubernetes/build/supabase-0.0.1.tgz
     version: 0.0.1
-generated: "2024-09-13T19:07:08.089377785Z"
+generated: "2025-04-22T12:35:47.300349719Z"
