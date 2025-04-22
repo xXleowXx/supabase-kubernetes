@@ -1,4 +1,4 @@
-{{- if .Values.functions.enabled -}}
+{{- if and .Values.functions.enabled .Values.functions.createMainFunction -}}
 apiVersion: v1
 kind: ConfigMap
 metadata:

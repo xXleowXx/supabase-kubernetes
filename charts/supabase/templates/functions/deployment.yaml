@@ -30,9 +30,7 @@ spec:
         {{- toYaml .Values.functions.podSecurityContext | nindent 8 }}
       containers:
         - args:
-            - start
-            - --main-service
-            - /home/deno/functions/main
+          {{- toYaml .Values.functions.args | nindent 12 }}
           name: {{ include "supabase.functions.name" $ }}
           securityContext:
             {{- toYaml .Values.functions.securityContext | nindent 12 }}
@@ -111,6 +109,10 @@ spec:
                   {{- end }}
             - name: POSTGRES_BACKEND_URL
               value: $(DB_DRIVER)://$(DB_USERNAME):$(DB_PASSWORD_ENC)@$(DB_HOSTNAME):$(DB_PORT)/$(DB_DATABASE)?search_path=auth&sslmode=$(DB_SSL)
+          {{- with .Values.functions.envFrom }}
+          envFrom:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           {{- with .Values.functions.livenessProbe }}
           livenessProbe:
             {{- toYaml . | nindent 12 }}
@@ -119,23 +121,18 @@ spec:
           readinessProbe:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+          {{- with .Values.functions.volumeMounts }}
           volumeMounts:
-            {{- with .Values.functions.volumeMounts }}
-              {{- toYaml . | nindent 12 }}
-            {{- end }}
-            - mountPath: /home/deno/functions/main
-              name: functions-main
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           {{- with .Values.functions.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
+      {{- with .Values.functions.volumes }}
       volumes:
-        {{- with .Values.functions.volumes }}
-          {{- toYaml . | nindent 8 }}
-        {{- end }}
-        - name: functions-main
-          configMap:
-            name: {{ include "supabase.functions.fullname" . }}-main
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       {{- with .Values.functions.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
