@@ -1,0 +1,18 @@
+{{- if .Values.db.networkPolicy.ingress }}
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ include "supabase.db.fullname" . }}
+  labels:
+    {{- include "supabase.labels" . | nindent 4 }}
+spec:
+  podSelector:
+    matchLabels:
+    {{- include "supabase.db.selectorLabels" . | nindent 4 }}
+  ingress:
+  {{- with .Values.db.networkPolicy.ingress }}
+  {{- toYaml . | nindent 4 }}
+  {{- end }}
+  policyTypes:
+    - Ingress
+{{- end }}
