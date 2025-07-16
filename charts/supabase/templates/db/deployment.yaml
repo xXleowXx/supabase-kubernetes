@@ -37,7 +37,6 @@ spec:
           args:
             - |
               KEY_FILE=/pgsodium-key/pgsodium_root.key
-              TARGET_FILE=/etc/postgresql-custom/pgsodium_root.key
               
               # Check if key exists in persistent storage
               if [ ! -f "${KEY_FILE}" ]; then
@@ -48,12 +47,6 @@ spec:
               else
                 echo "pgsodium root key already exists in persistent storage"
               fi
-              
-              # Copy the key to the expected location
-              cp "${KEY_FILE}" "${TARGET_FILE}"
-              chown postgres:postgres "${TARGET_FILE}"
-              chmod 600 "${TARGET_FILE}"
-              echo "pgsodium root key copied to ${TARGET_FILE}"
           volumeMounts:
             - mountPath: /pgsodium-key
               name: postgres-volume
@@ -88,6 +81,20 @@ spec:
             {{- toYaml .Values.db.securityContext | nindent 12 }}
           image: "{{ .Values.db.image.repository }}:{{ .Values.db.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.db.image.pullPolicy }}
+          {{- if .Values.db.persistence.enabled }}
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              # Link the persisted key to the expected location
+              if [ -f "/pgsodium-key/pgsodium_root.key" ]; then
+                echo "Linking persisted pgsodium key..."
+                mkdir -p /etc/postgresql-custom
+                ln -sf /pgsodium-key/pgsodium_root.key /etc/postgresql-custom/pgsodium_root.key
+              fi
+              
+              # Run the original entrypoint
+              exec docker-entrypoint.sh postgres
+          {{- end }}
           env:
             {{- range $key, $value := .Values.db.environment }}
             - name: {{ $key }}
@@ -165,6 +172,9 @@ spec:
             - mountPath: /var/lib/postgresql/data
               name: postgres-volume
               subPath: postgres-data
+            - mountPath: /pgsodium-key
+              name: postgres-volume
+              subPath: pgsodium-keys
             {{- end }}
           {{- with .Values.db.resources }}
           resources:
