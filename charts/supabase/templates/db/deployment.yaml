@@ -135,6 +135,9 @@ spec:
             - mountPath: /var/lib/postgresql/data
               name: postgres-volume
               subPath: postgres-data
+            - mountPath: /etc/postgresql-custom
+              name: postgres-volume
+              subPath: postgres-custom
             {{- end }}
           {{- with .Values.db.resources }}
           resources:
