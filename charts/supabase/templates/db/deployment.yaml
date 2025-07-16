@@ -92,8 +92,7 @@ spec:
                 ln -sf /pgsodium-key/pgsodium_root.key /etc/postgresql-custom/pgsodium_root.key
               fi
               
-              # Run the original entrypoint
-              exec docker-entrypoint.sh postgres
+              /usr/local/bin/docker-entrypoint.sh postgres -D /etc/postgresql
           {{- end }}
           env:
             {{- range $key, $value := .Values.db.environment }}
