@@ -119,25 +119,9 @@ spec:
                   key: secret
                   {{- end }}
             - name: GOTRUE_SMTP_USER
-              valueFrom:
-                secretKeyRef:
-                  {{- if .Values.secret.smtp.secretRef }}
-                  name: {{ .Values.secret.smtp.secretRef }}
-                  key: {{ .Values.secret.smtp.secretRefKey.username | default "username" }}
-                  {{- else }}
-                  name: {{ include "supabase.secret.smtp" . }}
-                  key: username
-                  {{- end }}
+              value: SMTP
             - name: GOTRUE_SMTP_PASS
-              valueFrom:
-                secretKeyRef:
-                  {{- if .Values.secret.smtp.secretRef }}
-                  name: {{ .Values.secret.smtp.secretRef }}
-                  key: {{ .Values.secret.smtp.secretRefKey.password | default "password" }}
-                  {{- else }}
-                  name: {{ include "supabase.secret.smtp" . }}
-                  key: password
-                  {{- end }}
+              value: SMTP
           {{- with .Values.auth.envFrom }}
           envFrom:
             {{- toYaml . | nindent 12 }}
