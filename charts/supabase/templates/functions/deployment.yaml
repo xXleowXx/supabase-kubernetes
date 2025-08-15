@@ -29,9 +29,7 @@ spec:
       securityContext:
         {{- toYaml .Values.functions.podSecurityContext | nindent 8 }}
       containers:
-        - args:
-          {{- toYaml .Values.functions.args | nindent 12 }}
-          name: {{ include "supabase.functions.name" $ }}
+        - name: {{ include "supabase.functions.name" $ }}
           securityContext:
             {{- toYaml .Values.functions.securityContext | nindent 12 }}
           image: "{{ .Values.functions.image.repository }}:{{ .Values.functions.image.tag | default .Chart.AppVersion }}"
