@@ -81,11 +81,6 @@ spec:
                   key: apiKey
                   {{- end }}
             {{- end }}
-          {{- with .Values.studio.livenessProbe }}
-          livenessProbe:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
-          {{- with .Values.studio.readinessProbe }}
           readinessProbe:
             {{- toYaml . | nindent 12 }}
           {{- end }}
