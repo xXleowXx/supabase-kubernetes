@@ -6,12 +6,6 @@ metadata:
   labels:
     {{- include "supabase.labels" . | nindent 4 }}
 data:
-  01-leo.sql |
-    do $$ begin
-        create type auth.factor_type as enum('totp', 'webauthn');
-    exception
-        when duplicate_object then null;
-    end $$;
   99-jwt.sql: |
     \set jwt_secret `echo "$JWT_SECRET"`
     \set jwt_exp `echo "$JWT_EXP"`
